@@ -1,4 +1,6 @@
-import http from "node:http";
+import http from 'node:http';
+import { json } from './middlewares/json.js';
+import { routes } from './routes.js';
 
 // - Criar usuário
 // - Listagem de usuários
@@ -28,29 +30,28 @@ import http from "node:http";
 
 // HTTP Status Code
 
-const users = [];
+// UUID => Unique Universal ID
 
-const server = http.createServer((req, res) => {
+// Query Parameters:
+// Route Parameters:
+// Request Body:
+
+// http://localhost:3333/users?userId=1
+
+const server = http.createServer(async (req, res) => {
   const { method, url } = req;
 
-  if (method === "GET" && url === "/users") {
-    //Early return
-    return res
-      .setHeader("Content-type", "application/json")
-      .end(JSON.stringify(users));
+  await json(req, res);
+
+  const route = routes.find((route) => {
+    return route.method === method && route.path === url;
+  });
+
+  if (route) {
+    return route.handler(req, res);
   }
 
-  if (method === "POST" && url === "/users") {
-    users.push({
-      id: 1,
-      name: "Jonh",
-      email: "jonh@email.com",
-    });
-
-    return res.writeHead(201).end();
-  }
-
-  return res.writeHead(404).end("Not Found!");
+  return res.writeHead(404).end('Not Found!');
 });
 
 server.listen(3333);

@@ -32,11 +32,11 @@ import { routes } from './routes.js';
 
 // UUID => Unique Universal ID
 
-// Query Parameters:
+// Query Parameters: URL Stateful => Filtros, paginação, não-obrigatórios (Parametros nomeados enviados no próprio endereço da requisição)
 // Route Parameters:
 // Request Body:
 
-// http://localhost:3333/users?userId=1
+// Query Parameters ex.: http://localhost:3333/users?userId=1&name=Victor
 
 const server = http.createServer(async (req, res) => {
   const { method, url } = req;

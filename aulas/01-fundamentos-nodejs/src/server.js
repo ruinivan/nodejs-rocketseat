@@ -33,10 +33,17 @@ import { routes } from './routes.js';
 // UUID => Unique Universal ID
 
 // Query Parameters: URL Stateful => Filtros, paginação, não-obrigatórios (Parametros nomeados enviados no próprio endereço da requisição)
-// Route Parameters:
-// Request Body:
+// Route Parameters: Identificação de recurso
+// Request Body: Envio de informações de um formulário (HTTPs) - fora da url
 
 // Query Parameters ex.: http://localhost:3333/users?userId=1&name=Victor
+
+// Route Parameters ex.: GET http://localhost:3333/users/1
+// Route Parameters ex.: DELETE http://localhost:3333/users/1
+
+// Request Body ex.: POST http://localhost:3333/users
+
+// Edição e remoção
 
 const server = http.createServer(async (req, res) => {
   const { method, url } = req;
@@ -44,10 +51,14 @@ const server = http.createServer(async (req, res) => {
   await json(req, res);
 
   const route = routes.find((route) => {
-    return route.method === method && route.path === url;
+    return route.method === method && route.path.test(url);
   });
 
   if (route) {
+    const routeParams = req.url.match(route.path);
+
+    req.params = { ...routeParams.groups };
+
     return route.handler(req, res);
   }
 

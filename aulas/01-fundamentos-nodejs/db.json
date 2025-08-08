@@ -1,1 +1,19 @@
-{"users":[{"id":"413b534d-a72e-42d2-9fd4-68d7fd4cab61","name":"teteu do toto","email":"teteutodo@email.com"},{"id":"02378842-17fc-4c2a-ac8d-ff0586cb2e46","name":"brenda","email":"brenda@email.com"},{"id":"bc8d9783-887d-4310-aea3-e4c5fb713231","name":"victor","email":"victor@email.com"}]}
+{
+  "users": [
+    {
+      "id": "413b534d-a72e-42d2-9fd4-68d7fd4cab61",
+      "name": "teteu do toto",
+      "email": "teteutodo@email.com"
+    },
+    {
+      "id": "02378842-17fc-4c2a-ac8d-ff0586cb2e46",
+      "name": "brenda",
+      "email": "brenda@email.com"
+    },
+    {
+      "id": "bc8d9783-887d-4310-aea3-e4c5fb713231",
+      "name": "Victor",
+      "email": "victor@email.com"
+    }
+  ]
+}
